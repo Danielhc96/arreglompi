@@ -2,11 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int arreglo1[1000000];
-int arreglo2[1000000];
-int arreglo3[1000000];
-int arreglo4[1000000];
-
 // Devuelve un número aleatorio en un rango
 int aleatorio(int minimo, int maximo) {
   return minimo + rand() / (RAND_MAX / (maximo - minimo + 1) + 1);
@@ -59,9 +54,20 @@ void insertar(int listaOrdenada[],int N, int numelem,int numero){
         }
     }
 }
-
 int main (int argc, char *argv[]){
-    int i, n, j, npr, pid, p, r, nm;
+    /*********
+    *
+    crear areglo y llenar con numeros aleatoreos
+    *
+    *********/
+    int i, n;
+    printf("Introduzca tamaño del arreglo: ");
+    scanf("%d",&n);
+    int arreglo1 [n];
+    srand(time(NULL));
+    for (i=0; i<n; i++){
+        arreglo1[i] = aleatorio(0, 10000);
+    }
     /*********
     *
     Inicio MPI
@@ -69,10 +75,21 @@ int main (int argc, char *argv[]){
     pid = indentificador de proceso
     *
     *********/
+    int npr, pid;
     MPI_Status estado;
     MPI_Init(&argc, &argv);
     MPI_Comm_size(MPI_COMM_WORLD, &npr);
     MPI_Comm_rank(MPI_COMM_WORLD,&pid);
+    /*********
+    *
+    Dividir en partes iguales y obtener el resto
+    *
+    *********/
+    int p = n/npr;          /*parte a repartir*/
+    int r = n%npr;          /*numeros sobrantes (resto)*/
+    int nm = p+r;           /*numeros que trabajara el maestro*/
+    int arreglo2[nm];       /*arreglo para maestro*/
+    int arreglo3[p];        /*arreglo para esclavos*/
     /*********
     *
     Parte del Maestro
@@ -83,31 +100,8 @@ int main (int argc, char *argv[]){
     - juntar arreglos
     *
     *********/
+    int j;
     if (pid == 0){
-        /*********
-        *
-        crear areglo
-        *
-        *********/
-        printf("Introduzca tamaño del arreglo: ");
-        scanf("%d",&n);
-        /*********
-        *
-        llena con numeros aleatoreos
-        *
-        *********/
-        srand(time(NULL));
-        for (i=0; i<n; i++){
-            arreglo1[i] = aleatorio(0, 10000);
-        }
-        /*********
-        *
-        Dividir en partes iguales y obtener el resto
-        *
-        *********/
-        p = n/npr;          /*parte a repartir*/
-        r = n%npr;          /*numeros sobrantes (resto)*/
-        nm = p+r;           /*numeros que trabajara el maestro*/
         /*********
         *
         Envio de tareas a procesos
@@ -118,7 +112,6 @@ int main (int argc, char *argv[]){
                 arreglo3[j]=arreglo1[j+p*(i-1)];
                 }
             MPI_Send(&arreglo3[0],p,MPI_INT,i,2,MPI_COMM_WORLD); /*envio de arreglo*/
-            MPI_Send(&p,1,MPI_INT,i,3,MPI_COMM_WORLD); /*envio de tamaño*/
             printf("\n\nArreglo enviado");
             for (j=0;j<p;j++){              /*bandera*/
                 printf("\nNumero %d = %d", j+1, arreglo3[j]);
@@ -146,6 +139,7 @@ int main (int argc, char *argv[]){
         crea arreglo y llena con datos ordenados del maestro
         *
         *********/
+        int arreglo4[n]; /*arreglo donde se agregaran datos ordenados*/
         for (i=0; i<n; i++){  /*inicializa en 0*/
             arreglo4[i] = 0;
         }
@@ -189,7 +183,6 @@ int main (int argc, char *argv[]){
     *********/
     if(pid > 0){
         MPI_Recv(&arreglo3[0],p,MPI_INT,0,2,MPI_COMM_WORLD,&estado); /*recibe arreglo*/
-        MPI_Recv(&p,1,MPI_INT,0,3,MPI_COMM_WORLD,&estado); /*recibe tamaño*/
         printf("\n\nArreglo recibido");
         for (j=0;j<p;j++){              /*bandera*/
             printf("\nNumero %d = %d", j+1, arreglo3[j]);
