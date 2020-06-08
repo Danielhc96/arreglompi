@@ -52,6 +52,7 @@ void insertar(int listaOrdenada[],int N, int numelem,int numero){
            }
            listaOrdenada[i] = numero;
         }
+    }
 }
 int main (int argc, char *argv[]){
     /*********
@@ -170,7 +171,7 @@ int main (int argc, char *argv[]){
         *********/
         printf("\n\nArreglo ordenado final");
         for (i=0;i<n;i++){
-        printf("\nNumero %d = %d", i+1, arreglo[i]);
+        printf("\nNumero %d = %d", i+1, arreglo4[i]);
         }
     }
     /*********
