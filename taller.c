@@ -111,8 +111,8 @@ int main (int argc, char *argv[]){
             for(j=0; j<p; j++){     /*llena el arreglo en funcion de las maquinas*/
                 arreglo3[j]=arreglo1[j+p*(i-1)];
                 }
-            MPI_Send(arreglo3,p,MPI_INT,i,2,MPI_COMM_WORLD); /*envio de arreglo*/
-            MPI_Send(p,1,MPI_INT,i,3,MPI_COMM_WORLD); /*envio de tamaño*/
+            MPI_Send(&arreglo3[0],p,MPI_INT,i,2,MPI_COMM_WORLD); /*envio de arreglo*/
+            MPI_Send(&p,1,MPI_INT,i,3,MPI_COMM_WORLD); /*envio de tamaño*/
             printf("\n\nArreglo enviado");
             for (j=0;j<p;j++){              /*bandera*/
                 printf("\nNumero %d = %d", j+1, arreglo3[j]);
@@ -184,7 +184,7 @@ int main (int argc, char *argv[]){
     *********/
     else if(pid > 0){
         MPI_Recv(arreglo3,p,MPI_INT,0,2,MPI_COMM_WORLD,&estado); /*recibe arreglo*/
-        MPI_Recv(p,1,MPI_INT,0,3,MPI_COMM_WORLD,&estado); /*recibe tamaño*/
+        MPI_Recv(&p,1,MPI_INT,0,3,MPI_COMM_WORLD,&estado); /*recibe tamaño*/
         printf("\n\nArreglo recibido");
         for (j=0;j<p;j++){              /*bandera*/
             printf("\nNumero %d = %d", j+1, arreglo3[j]);
@@ -194,7 +194,7 @@ int main (int argc, char *argv[]){
         for (j=0;j<p;j++){              /*bandera*/
             printf("\nNumero %d = %d", j+1, arreglo3[j]);
         }
-        MPI_Send(arreglo3,p,MPI_INT,0,2,MPI_COMM_WORLD);
+        MPI_Send(&arreglo3[0],p,MPI_INT,0,2,MPI_COMM_WORLD);
     }
     /*********
     *
