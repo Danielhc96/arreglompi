@@ -2,10 +2,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define arreglo1[1000000]
-#define arreglo2[1000000]
-#define arreglo3[1000000]
-#define arreglo4[1000000]
+int arreglo1[1000000];
+int arreglo2[1000000];
+int arreglo3[1000000];
+int arreglo4[1000000];
 
 // Devuelve un número aleatorio en un rango
 int aleatorio(int minimo, int maximo) {
