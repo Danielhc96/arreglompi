@@ -2,6 +2,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define arreglo1[1000000]
+#define arreglo2[1000000]
+#define arreglo3[1000000]
+#define arreglo4[1000000]
+
 // Devuelve un número aleatorio en un rango
 int aleatorio(int minimo, int maximo) {
   return minimo + rand() / (RAND_MAX / (maximo - minimo + 1) + 1);
@@ -86,7 +91,6 @@ int main (int argc, char *argv[]){
         *********/
         printf("Introduzca tamaño del arreglo: ");
         scanf("%d",&n);
-        int arreglo1 [n];  
         /*********
         *
         llena con numeros aleatoreos
@@ -104,8 +108,6 @@ int main (int argc, char *argv[]){
         p = n/npr;          /*parte a repartir*/
         r = n%npr;          /*numeros sobrantes (resto)*/
         nm = p+r;           /*numeros que trabajara el maestro*/
-        int arreglo2[nm];       /*arreglo para maestro*/
-        int arreglo3[p];        /*arreglo para esclavos*/
         /*********
         *
         Envio de tareas a procesos
@@ -144,7 +146,6 @@ int main (int argc, char *argv[]){
         crea arreglo y llena con datos ordenados del maestro
         *
         *********/
-        int arreglo4[n]; /*arreglo donde se agregaran datos ordenados*/
         for (i=0; i<n; i++){  /*inicializa en 0*/
             arreglo4[i] = 0;
         }
