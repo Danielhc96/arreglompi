@@ -34,7 +34,7 @@ int  main ( int argc, char * argv [])
      
      printf("\n\nArreglo maestro");
      for (j=0;j<p;j++){
-      printf("\nNumero %d = %d", j+1, arreglo[j]);
+      printf("\nNumeroM %d = %d", j+1, arreglo[j]);
      }
      for (i=1; i<npr; i++) {
       source = i;
@@ -49,7 +49,7 @@ int  main ( int argc, char * argv [])
       
       printf("\n\nArreglo nodo");
       for (j=nm;j<nm+p;j++){
-        printf("\nNumero %d = %d", j+1, arreglo[j]);
+        printf("\nNumeroN %d = %d", j+1, arreglo[j]);
       }
 
       dest = 0;
