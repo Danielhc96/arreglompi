@@ -40,8 +40,8 @@ int  main ( int argc, char * argv [])
       source = i;
       MPI_Recv(&nm, 1, MPI_INT, source, tag1, MPI_COMM_WORLD, &status);
       MPI_Recv(&arreglo[nm], p, MPI_INT, source, tag2, MPI_COMM_WORLD, &status);
-    }
-    
+     }
+  }
     if (pid > 0){
       source = 0;
       MPI_Recv(&nm, 1, MPI_INT, source, tag1, MPI_COMM_WORLD, &status);
