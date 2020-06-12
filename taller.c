@@ -146,16 +146,7 @@ int main (int argc, char *argv[]){
         for (i=1; i<npr; i++){
             source = i;
             MPI_Recv(&nm, 1, MPI_INT, source, tag1, MPI_COMM_WORLD, &status);
-            MPI_Recv(&arreglo[nm], p, MPI_INT, source, tag2, MPI_COMM_WORLD, &status);
-            
-            for(j=0; j<p; j++){
-                arreglo2[j] = arreglo[j+nm];
-            }
-            for (j=0; j<p; j++){
-                printf("\nNumero %d = %d", j+1, arreglo2[j]);
-            }
-            printf("\narreglo proceso");
-          
+            MPI_Recv(&arreglo[nm], p, MPI_INT, source, tag2, MPI_COMM_WORLD, &status); 
         }
       
          /*********
@@ -163,6 +154,17 @@ int main (int argc, char *argv[]){
         junta y muestra arreglo ordenado
          *
         *********/
+        for (i=1; i<npr; i++){
+            /*for(j=nm; j<nm+p; j++){
+                arreglo2[j] = arreglo[j+nm];
+            }*/
+            printf("\narreglo proceso");
+            for (j=0; j<p; j++){
+                printf("\nNumero %d = %d", j+1, arreglo2[nm]);
+                nm++;
+            }
+        }
+      
         /*nm = p+r;
         for (i=1; i<npr ; i++){
             merge(nm, nm+p, nm+(i+1)*p+1 , arreglo, arreglo2);
