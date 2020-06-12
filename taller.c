@@ -73,7 +73,7 @@ int main (int argc, char *argv[]){
     *********/
   
     int i, j, n;
-    n=10;
+    n=10000;
     int arreglo[n];
     srand(time(NULL));
     for (i=0; i<n; i++){
@@ -170,29 +170,19 @@ int main (int argc, char *argv[]){
         muestra arreglo ordenado
          *
         *********/
-        printf("\n\nArreglo no ordenado");
-        for (i=0;i <n; i++){
-            printf("\nNumero %d = %d", i+1, arreglo[i]);
-        }
-      
-        printf("\n\nArreglo2");
-        for (i=0;i <(p+r); i++){
-            printf("\nNumero %d = %d", i+1, arreglo2[i]);
-        }
-        printf("\n");
-      
+        
         int arreglo3[p];
         int arreglo4[n];
-        printf("\nArreglo nodo");
+
         nm = p+r;
         for (i=1; i<npr; i++){
             for(j=nm; j<nm+p; j++){
                 arreglo3[j-nm] = arreglo[j];
-                printf("\nNumero %d = %d", j+1, arreglo[j]);
             }
             merge(arreglo2, nm, arreglo3, p, arreglo4);
             nm = nm + p;
         }
+      
         printf("\n\nArreglo ordenado");
         for (i=0;i <n; i++){
             printf("\nNumero %d = %d", i+1, arreglo4[i]);
