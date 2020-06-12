@@ -63,29 +63,7 @@ void merge(int a[], int m, int b[], int n, int sorted[]) {
     }
   }
 }
-void insertar(int listaOrdenada[],int N, int numelem,int numero){
-     while(numero != 0 && numelem < N){
-        int i = 0;
-        //ubica la posición para insertar el número
-        while(i<numelem && listaOrdenada[i] < numero) i++;
-        //en el caso que se inserte en la última posición: i == numelem
-        if(i==numelem) {
-           listaOrdenada[i]=numero;
-           numelem++;
-        }
-        else{
-           //tiene que desplazar a todos los elementos posteriores
-           int j = numelem;
-           numelem++;
-           //recorre la lista de forma inversa para desplazar los valores
-           while(j>i){
-             listaOrdenada[j] = listaOrdenada[j-1];
-             j--;
-           }
-           listaOrdenada[i] = numero;
-        }
-    }
-}
+
 int main (int argc, char *argv[]){
   
     /*********
@@ -94,10 +72,10 @@ int main (int argc, char *argv[]){
     *
     *********/
   
-    int i, j;
-    /*printf("Introduzca tamaño del arreglo: ");
-    scanf("%d",&n);*/
-    int arreglo[10];
+    int i, j, n;
+    printf("Introduzca tamaño del arreglo: ");
+    scanf("%d",&n);
+    int arreglo[n];
     srand(time(NULL));
     for (i=0; i<10; i++){
         arreglo[i] = aleatorio(0, 10000);
@@ -123,8 +101,8 @@ int main (int argc, char *argv[]){
     *
     *********/
   
-    int p = 10/npr;          /*parte a repartir*/
-    int r = 10%npr;          /*numeros sobrantes (resto)*/
+    int p = n/npr;          /*parte a repartir*/
+    int r = n%npr;          /*numeros sobrantes (resto)*/
     int nm, dest, source;  /*parte de maestro, destino, fuente, contador*/
     int tag1 = 2;
     int tag2 = 1;
@@ -194,7 +172,7 @@ int main (int argc, char *argv[]){
          *
         *********/
         printf("\n\nArreglo no ordenado");
-        for (i=0;i <10; i++){
+        for (i=0;i <n; i++){
             printf("\nNumero %d = %d", i+1, arreglo[i]);
         }
       
@@ -205,7 +183,7 @@ int main (int argc, char *argv[]){
         printf("\n");
       
         int arreglo3[p];
-        int arreglo4[10];
+        int arreglo4[n];
         printf("\nArreglo nodo");
         nm = p+r;
         for (i=1; i<npr; i++){
@@ -217,7 +195,7 @@ int main (int argc, char *argv[]){
             nm = nm + p;
         }
         printf("\n\nArreglo ordenado");
-        for (i=0;i <10; i++){
+        for (i=0;i <n; i++){
             printf("\nNumero %d = %d", i+1, arreglo4[i]);
         }
         printf("\n");
