@@ -159,18 +159,6 @@ int main (int argc, char *argv[]){
                 insertar(arreglo2,10,nm,arreglo[j]);
             }
         }
-      
-        /*********
-        *
-        muestra arreglo ordenado
-         *
-        *********/
-      
-        printf("\n\nArreglo ordenado");
-        for (i=0;i <10; i++){
-            printf("\nNumero %d = %d", i+1, arreglo[i]);
-        }
-        printf("\n");
     }
   
     /*********
@@ -193,6 +181,18 @@ int main (int argc, char *argv[]){
         MPI_Send(&nm, 1, MPI_INT, dest, tag1, MPI_COMM_WORLD);
         MPI_Send(&arreglo[nm], p, MPI_INT, dest, tag2, MPI_COMM_WORLD);
     }
+  
+    /*********
+    *
+    muestra arreglo ordenado
+     *
+    *********/
+
+    printf("\n\nArreglo ordenado");
+    for (i=0;i <10; i++){
+        printf("\nNumero %d = %d", i+1, arreglo[i]);
+    }
+    printf("\n\n");
   
     /*********
     *
