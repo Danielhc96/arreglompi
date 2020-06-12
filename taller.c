@@ -63,58 +63,6 @@ void merge(int a[], int m, int b[], int n, int sorted[]) {
     }
   }
 }
-void merge2(int arr[ ], int l, int m, int r) 
-{ 
-    int i, j, k; 
-    int n1 = m - l + 1; 
-    int n2 = r - m; 
-
-    /* create temp arrays */
-    int L[n1], R[n2]; 
-
-    /* Copy data to temp arrays L[ ] and R[ ] */
-    for (i = 0; i < n1; i++) 
-        L[i] = arr[l + i]; 
-    for (j = 0; j < n2; j++) 
-        R[j] = arr[m + 1+ j]; 
-
-    /* Merge the temp arrays back into arr[l..r]*/
-    i = 0; // Initial index of first subarray 
-    j = 0; // Initial index of second subarray 
-    k = l; // Initial index of merged subarray 
-    while (i < n1 && j < n2) 
-    { 
-        if (L[i] <= R[j]) 
-        { 
-            arr[k] = L[i]; 
-            i++; 
-        } 
-        else
-        { 
-            arr[k] = R[j]; 
-            j++; 
-        } 
-        k++; 
-    } 
-
-    /* Copy the remaining elements of L[], if there 
-    are any */
-    while (i < n1) 
-    { 
-        arr[k] = L[i]; 
-        i++; 
-        k++; 
-    } 
-
-    /* Copy the remaining elements of R[], if there 
-    are any */
-    while (j < n2) 
-    { 
-        arr[k] = R[j]; 
-        j++; 
-        k++; 
-    } 
-} 
 
 int main (int argc, char *argv[]){
   
@@ -197,8 +145,8 @@ int main (int argc, char *argv[]){
         *
         *********/
       
-        int arreglo2[p+r]; /*arreglo donde se agregaran datos ordenados*/
-        for (i=0; i<(p+r); i++){  /*inicializa en 0*/
+        int arreglo2[n]; /*arreglo donde se agregaran datos ordenados*/
+        for (i=0; i<(n); i++){  /*inicializa en 0*/
             arreglo2[i] = 0;
         }
         for (i=0; i<(p+r); i++){  /*agrega datos ordenados de maestro*/
@@ -231,8 +179,10 @@ int main (int argc, char *argv[]){
             for(j=0; j<p; j++){
                 arreglo3[j] = arreglo[j+nm];
             }
-            merge2(arreglo, 0, nm, nm+p);
-            /*merge(arreglo2, nm, arreglo3, p, arreglo4);*/
+            merge(arreglo2, nm, arreglo3, p, arreglo4);
+            for(j=0; j<nm; j++){
+              arreglo2[j]=arreglo4[j];
+            }
             nm = nm + p;
         }
       
