@@ -169,7 +169,7 @@ int main (int argc, char *argv[]){
         *********/
       
         int arreglo2[p+r]; /*arreglo donde se agregaran datos ordenados*/
-        for (i=0; i<p+r; i++){  /*inicializa en 0*/
+        for (i=0; i<10; i++){  /*inicializa en 0*/
             arreglo2[i] = 0;
         }
         for (i=0; i<p+r; i++){  /*agrega datos ordenados de maestro*/
