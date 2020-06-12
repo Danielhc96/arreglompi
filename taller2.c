@@ -80,7 +80,7 @@ int main (int argc, char *argv[]){
     int arreglo[n];
     srand(time(NULL));
     for (i=0; i<n; i++){
-        arreglo[i] = aleatorio(0, 10000);
+        arreglo[i] = aleatorio(0, 100000);
     }
   
     /*********
