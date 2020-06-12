@@ -60,13 +60,14 @@ int main (int argc, char *argv[]){
     crear areglo y llenar con numeros aleatoreos
     *
     *********/
-    int i, n;
-    printf("Introduzca tamaño del arreglo: ");
-    scanf("%d",&n);
-    int arreglo1 [n];
+    int i, j;
+    int n = 10;
+    /*printf("Introduzca tamaño del arreglo: ");
+    scanf("%d",&n);*/
+    int arreglo[n];
     srand(time(NULL));
     for (i=0; i<n; i++){
-        arreglo1[i] = aleatorio(0, 10000);
+        arreglo[i] = aleatorio(0, 10000);
     }
     /*********
     *
@@ -76,10 +77,10 @@ int main (int argc, char *argv[]){
     *
     *********/
     int npr, pid;
-    MPI_Status estado;
+    MPI_Status status;
     MPI_Init(&argc, &argv);
     MPI_Comm_size(MPI_COMM_WORLD, &npr);
-    MPI_Comm_rank(MPI_COMM_WORLD,&pid);
+    MPI_Comm_rank(MPI_COMM_WORLD, &pid);
     /*********
     *
     Dividir en partes iguales y obtener el resto
@@ -87,9 +88,10 @@ int main (int argc, char *argv[]){
     *********/
     int p = n/npr;          /*parte a repartir*/
     int r = n%npr;          /*numeros sobrantes (resto)*/
-    int nm = p+r;           /*numeros que trabajara el maestro*/
-    int arreglo2[nm];       /*arreglo para maestro*/
-    int arreglo3[p];        /*arreglo para esclavos*/
+    /*int nm = p+r;           /*numeros que trabajara el maestro*/
+    int nm, dest, source, j;  /*parte de maestro, destino, fuente, contador*/
+    int tag1 = 2;
+    int tag2 = 1;
     /*********
     *
     Parte del Maestro
@@ -107,15 +109,16 @@ int main (int argc, char *argv[]){
         Envio de tareas a procesos
         *
         *********/
-        for(i=1; i<npr; i++){
-            for(j=0; j<p; j++){     /*llena el arreglo en funcion de las maquinas*/
-                arreglo3[j]=arreglo1[j+p*(i-1)];
-                }
-            MPI_Send(&arreglo3[0],p,MPI_INT,i,100,MPI_COMM_WORLD); /*envio de arreglo*/
+      nm = p+r;  
+      for(dest=1; dest<npr; dest++){
+           /* for(j=0; j<p; j++){     /*llena el arreglo en funcion de las maquinas*/
+                /*arreglo3[j]=arreglo1[j+p*(i-1)];
+                }*/
+            /*MPI_Send(&arreglo3[0],p,MPI_INT,i,100,MPI_COMM_WORLD); /*envio de arreglo*/
+            MPI_Send(&nm, 1, MPI_INT, dest, tag1, MPI_COMM_WORLD);
+            MPI_Send(&arreglo[nm], p, MPI_INT, dest, tag2, MPI_COMM_WORLD);
             printf("\n\nArreglo enviado");
-            for (j=0;j<p;j++){              /*bandera*/
-                printf("\nNumero %d = %d", j+1, arreglo3[j]);
-            }
+            nm = nm + p;
         }
         /*********
         *
@@ -123,43 +126,39 @@ int main (int argc, char *argv[]){
         *
         *********/
         printf("\n\nArreglo maestro");
-        for (j=0; j<nm; j++){       /*llena la ultima parte*/
-            arreglo2[j]=arreglo1[j+p*(npr-1)];
-        }
-        for (j=0;j<nm;j++){              /*bandera*/
-            printf("\nNumero %d = %d", j+1, arreglo2[j]);
-        }
-        SortArray(arreglo2,0,nm);   /*ordena*/
+        /*for (j=0; j<nm; j++){       llena la ultima parte
+            arreglo2[j]=arreglo[j+p*(npr-1)];
+        }*/
+        
+        SortArray(arreglo,0,nm);   /*ordena*/
         printf("\n\nArreglo maestro ordenado");
         for (j=0;j<nm;j++){              /*bandera*/
-            printf("\nNumero %d = %d", j+1, arreglo2[j]);
+            printf("\nNumero %d = %d", j+1, arreglo[j]);
         }
         /*********
         *
         crea arreglo y llena con datos ordenados del maestro
         *
         *********/
-        int arreglo4[n]; /*arreglo donde se agregaran datos ordenados*/
+        int arreglo2[n]; /*arreglo donde se agregaran datos ordenados*/
         for (i=0; i<n; i++){  /*inicializa en 0*/
-            arreglo4[i] = 0;
+            arreglo2[i] = 0;
         }
-        for (i=0; i<nm; i++){ /*agrega datos ordenados de maestro*/
-            arreglo4[i] = arreglo2[i];
+        for (i=0; i<nm; i++){  /*agrega datos ordenados de maestro*/
+            arreglo2[i] = arreglo[i];
         }
         /*********
         *
         Recibe los arreglos desde esclavos e inserta en arreglo
         *
         *********/
-        for(i=1; i<npr; i++){
-            MPI_Recv(&arreglo3[0],p,MPI_INT,i,101,MPI_COMM_WORLD,&estado); /*recibe arreglo*/
-            printf("\n\nArreglo recibido");
-            for (j=0;j<p;j++){              /*bandera*/
-                printf("\nNumero %d = %d", j+1, arreglo3[j]);
-            }
+        for (i=1; i<npr; i++){
+            source = i;
+            MPI_Recv(&nm, 1, MPI_INT, source, tag1, MPI_COMM_WORLD, &status);
+            MPI_Recv(&arreglo[nm], p, MPI_INT, source, tag2, MPI_COMM_WORLD, &status);
             /*insertar un arreglo en otro*/
-            for (j=0; j<p; j++){
-                insertar(arreglo4,n,nm,arreglo3[j]);
+            for (j=nm; j< nm+p; j++){
+                insertar(arreglo2,n,nm,arreglo[j]);
             }
 
         }
@@ -170,7 +169,7 @@ int main (int argc, char *argv[]){
         *********/
         printf("\n\nArreglo ordenado final");
         for (i=0;i<n;i++){
-        printf("\nNumero %d = %d", i+1, arreglo4[i]);
+        printf("\nNumero %d = %d", i+1, arreglo[i]);
         }
     }
     /*********
@@ -181,18 +180,25 @@ int main (int argc, char *argv[]){
     - envia arreglo
     *
     *********/
-    if(pid > 0){
-        MPI_Recv(&arreglo3[0],p,MPI_INT,0,100,MPI_COMM_WORLD,&estado); /*recibe arreglo*/
-        printf("\n\nArreglo recibido");
-        for (j=0;j<p;j++){              /*bandera*/
-            printf("\nNumero %d = %d", j+1, arreglo3[j]);
+    if (pid > 0){
+        source = 0;
+        MPI_Recv(&nm, 1, MPI_INT, source, tag1, MPI_COMM_WORLD, &status);
+        MPI_Recv(&arreglo[nm], p, MPI_INT, source, tag2, MPI_COMM_WORLD, &status);
+        printf("\n\nArreglo nodo");
+        for (j=nm ; j<nm+p; j++){              /*bandera*/
+            printf("\nNumero %d = %d", j+1, arreglo[j]);
         }
-        SortArray(arreglo3,0,p);   /*ordena*/
+      
+        SortArray(arreglo,nm,nm+p);   /*ordena*/
+      
         printf("\n\nArreglo ordenado");
-        for (j=0;j<p;j++){              /*bandera*/
-            printf("\nNumero %d = %d", j+1, arreglo3[j]);
+        for (j=nm; j<nm+p; j++){              /*bandera*/
+            printf("\nNumero %d = %d", j+1, arreglo[j]);
         }
-        MPI_Send(&arreglo3[0],p,MPI_INT,0,101,MPI_COMM_WORLD);
+      
+        dest = 0;
+        MPI_Send(&nm, 1, MPI_INT, dest, tag1, MPI_COMM_WORLD);
+        MPI_Send(&arreglo[nm], p, MPI_INT, dest, tag2, MPI_COMM_WORLD);
     }
     /*********
     *
