@@ -31,12 +31,7 @@ void SortArray (int array[],int first,int last){
     if (i<last) SortArray(array,i,last);
 }
 
-void union (int i, int mid, int j, int a[], int aux[]){
-  /*i = puntero al primer elemento del arreglo a comparar
-    j = ultimo elemento -1
-    mid = hasta donde llega la primera parte
-    a[] = arreglo
-    aux [] = arregloauxiliar */
+void merge (int i, int mid, int j, int a[], int aux[]){
     int pointer_left = i;       // pointer_left points to the beginning of the left sub-array
     int pointer_right = mid + 1;        // pointer_right points to the beginning of the right sub-array
     int k;      // k is the loop counter
@@ -180,7 +175,7 @@ int main (int argc, char *argv[]){
             source = i;
             MPI_Recv(&nm, 1, MPI_INT, source, tag1, MPI_COMM_WORLD, &status);
             MPI_Recv(&arreglo[nm], p, MPI_INT, source, tag2, MPI_COMM_WORLD, &status);
-            union(p+r, nm+p, nm+(i+1)*p-1, arreglo, arreglo2);
+            merge(p+r, nm+p, nm+(i+1)*p-1, arreglo, arreglo2);
         }
       
          /*********
