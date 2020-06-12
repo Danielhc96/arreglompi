@@ -154,10 +154,6 @@ int main (int argc, char *argv[]){
             source = i;
             MPI_Recv(&nm, 1, MPI_INT, source, tag1, MPI_COMM_WORLD, &status);
             MPI_Recv(&arreglo[nm], p, MPI_INT, source, tag2, MPI_COMM_WORLD, &status);
-            /*insertar un arreglo en otro*/
-            for (j=nm; j< nm+p; j++){
-                insertar(arreglo2,10,nm,arreglo[j]);
-            }
         }
       
          /*********
@@ -165,9 +161,16 @@ int main (int argc, char *argv[]){
         muestra arreglo ordenado
          *
         *********/
+      
         printf("\n\nArreglo no ordenado");
         for (i=0;i <10; i++){
             printf("\nNumero %d = %d", i+1, arreglo[i]);
+        }
+        /*insertar un arreglo en otro*/
+        for (i=1; i<npr; i++){
+            for (j=nm; j< nm+p; j++){
+                insertar(arreglo2,10,nm,arreglo[j]);
+            }
         }
         printf("\n\nArreglo ordenado");
         for (i=0;i <10; i++){
