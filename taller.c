@@ -143,7 +143,7 @@ int main (int argc, char *argv[]){
             MPI_Recv(&arreglo[nm], p, MPI_INT, source, tag2, MPI_COMM_WORLD, &status);
             /*insertar un arreglo en otro*/
             for (j=nm; j< nm+p; j++){
-                insertar(arreglo2,n,nm,arreglo[j]);
+                insertar(arreglo2,10,nm,arreglo[j]);
             }
 
         }
