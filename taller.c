@@ -115,14 +115,7 @@ void merge2(int arr[ ], int l, int m, int r)
         k++; 
     } 
 } 
-// Copy the remaining elements of R[]
-while (j < n2)
-{
-arr[k] = R[j];
-j++;
-k++;
-}
-}
+
 int main (int argc, char *argv[]){
   
     /*********
