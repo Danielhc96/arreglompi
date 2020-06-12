@@ -125,8 +125,8 @@ int main (int argc, char *argv[]){
         crea arreglo y llena con datos ordenados del maestro
         *
         *********/
-        int arreglo2[n]; /*arreglo donde se agregaran datos ordenados*/
-        for (i=0; i<n; i++){  /*inicializa en 0*/
+        int arreglo2[10]; /*arreglo donde se agregaran datos ordenados*/
+        for (i=0; i<10; i++){  /*inicializa en 0*/
             arreglo2[i] = 0;
         }
         for (i=0; i<nm; i++){  /*agrega datos ordenados de maestro*/
@@ -153,7 +153,7 @@ int main (int argc, char *argv[]){
          *
         *********/
         printf("\n\nArreglo ordenado final");
-        for (i=0;i<n;i++){
+        for (i=0;i <10; i++){
         printf("\nNumero %d = %d", i+1, arreglo[i]);
         }
     }
