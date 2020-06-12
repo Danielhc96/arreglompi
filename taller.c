@@ -129,8 +129,7 @@ int main (int argc, char *argv[]){
         nm = p+r; 
         printf("\n\nArreglo en maestro");
         for (i=0; i<nm; i++){
-            arreglo2[i]=arreglo[i];
-            printf("\nNumero %d = %d", i+1, arreglo2[i]);
+            printf("\nNumero %d = %d", i+1, arreglo[i]);
         } 
         printf("\n\nArreglo en nodo");
         for(i=1; i<npr; i++){
