@@ -31,6 +31,38 @@ void SortArray (int array[],int first,int last){
     if (i<last) SortArray(array,i,last);
 }
 
+void union (int i, int mid, int j, int a[], int aux[]){
+  /*i = puntero al primer elemento del arreglo a comparar
+    j = ultimo elemento -1
+    mid = hasta donde llega la primera parte
+    a[] = arreglo
+    aux [] = arregloauxiliar */
+    int pointer_left = i;       // pointer_left points to the beginning of the left sub-array
+    int pointer_right = mid + 1;        // pointer_right points to the beginning of the right sub-array
+    int k;      // k is the loop counter
+
+    // we loop from i to j to fill each element of the final merged array
+    for (k = i; k <= j; k++) {
+        if (pointer_left == mid + 1) {      // left pointer has reached the limit
+            aux[k] = a[pointer_right];
+            pointer_right++;
+        } else if (pointer_right == j + 1) {        // right pointer has reached the limit
+            aux[k] = a[pointer_left];
+            pointer_left++;
+        } else if (a[pointer_left] < a[pointer_right]) {        // pointer left points to smaller element
+            aux[k] = a[pointer_left];
+            pointer_left++;
+        } else {        // pointer right points to smaller element
+            aux[k] = a[pointer_right];
+            pointer_right++;
+        }
+    }
+
+    for (k = i; k <= j; k++) {      // copy the elements from aux[] to a[]
+        a[k] = aux[k];
+    }
+
+}
 void insertar(int listaOrdenada[],int N, int numelem,int numero){
      while(numero != 0 && numelem < N){
         int i = 0;
@@ -134,31 +166,21 @@ int main (int argc, char *argv[]){
         *
         crea arreglo y llena con datos ordenados del maestro
         *
-        *********/
+        *********/      
       
-        int arreglo2[10]; /*arreglo donde se agregaran datos ordenados*/
-        for (i=0; i<10; i++){  /*inicializa en 0*/
-            arreglo2[i] = 0;
-        }
-        for (i=0; i<nm; i++){  /*agrega datos ordenados de maestro*/
-            arreglo2[i] = arreglo[i];
-        }
-      
+        int arreglo2[10]; /*arreglo aux */
+
         /*********
         *
         Recibe los arreglos desde esclavos e inserta en arreglo
         *
         *********/
-      
+     
         for (i=1; i<npr; i++){
             source = i;
             MPI_Recv(&nm, 1, MPI_INT, source, tag1, MPI_COMM_WORLD, &status);
             MPI_Recv(&arreglo[nm], p, MPI_INT, source, tag2, MPI_COMM_WORLD, &status);
-          /*insertar un arreglo en otro*/  
-            for (j=nm; j< nm+p; j++){
-                insertar(arreglo2,10,nm,arreglo[j]);
-            }
-          
+            union (p+r, nm+p, nm+(i+1)*p-1, arreglo, arreglo2)
         }
       
          /*********
@@ -167,15 +189,11 @@ int main (int argc, char *argv[]){
          *
         *********/
       
-        printf("\n\nArreglo no ordenado");
+        printf("\n\nArreglo ordenado");
         for (i=0;i <10; i++){
             printf("\nNumero %d = %d", i+1, arreglo[i]);
         }
         
-        printf("\n\nArreglo ordenado");
-        for (i=0;i <10; i++){
-            printf("\nNumero %d = %d", i+1, arreglo2[i]);
-        }
         printf("\n\n");
   
     }
