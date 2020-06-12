@@ -191,6 +191,8 @@ int main (int argc, char *argv[]){
             printf("%d ", arreglo4[i]);
         }
         printf("\n");
+        clock_t toc = clock();
+        printf("Transcurrido: %f segundos\n", (double)(toc - tic) / CLOCKS_PER_SEC);
     }
   
     /*********
@@ -220,8 +222,4 @@ int main (int argc, char *argv[]){
     *********/
   
     MPI_Finalize();
-    
-    clock_t toc = clock();
-    printf("Transcurrido: %f segundos\n", (double)(toc - tic) / CLOCKS_PER_SEC);
-    return 0;
 }
