@@ -93,7 +93,6 @@ int main (int argc, char *argv[]){
         Envio de tareas a procesos
         *
         *********/
-      
         nm = p+r;  
         for(dest=1; dest<npr; dest++){
               MPI_Send(&nm, 1, MPI_INT, dest, tag1, MPI_COMM_WORLD);
@@ -121,10 +120,11 @@ int main (int argc, char *argv[]){
             MPI_Recv(&arreglo[nm], p, MPI_INT, source, tag2, MPI_COMM_WORLD, &status); 
         }
       
-        printf("\n\nArreglo no ordenado");
-        for (i=0; i<10; i++){
-            printf("\nNumero %d = %d", i+1, arreglo[i]);
+        printf("\n\nArreglo ordenado");
+        for (j=0; j<10; i++){
+            printf("\nNumero %d = %d", j+1, arreglo[j]);
         }
+      
         printf("\n");
     }
   
