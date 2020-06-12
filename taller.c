@@ -109,7 +109,7 @@ int main (int argc, char *argv[]){
     - Envio de arreglos a procesos
     - trabajar parte
     - recibir arreglos
-    - juntar arreglos
+    - juntar 
     *
     *********/
   
@@ -135,12 +135,6 @@ int main (int argc, char *argv[]){
 
         SortArray(arreglo,0,nm);   /*ordena*/
 
-        /*********
-        *
-        crea arreglo y llena con datos ordenados del maestro
-        *
-        *********/      
-      
         int arreglo2[10]; /*arreglo aux */
 
         /*********
@@ -157,9 +151,14 @@ int main (int argc, char *argv[]){
       
          /*********
         *
-        muestra arreglo ordenado
+        junta y muestra arreglo ordenado
          *
         *********/
+        nm = p+r;
+        for (i=1; i<npr ; i++){
+            merge(nm, nm+p, nm+(i+1)*p+1 , arreglo, arreglo2);
+            nm = nm + p;
+        }
       
         printf("\n\nArreglo ordenado");
         for (i=0;i <10; i++){
@@ -175,7 +174,7 @@ int main (int argc, char *argv[]){
     Parte del Esclavo
     - recibe arreglo
     - trabaja arreglo
-    - envia arreglo
+    - envia 
     *
     *********/
   
