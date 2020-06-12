@@ -73,11 +73,11 @@ int main (int argc, char *argv[]){
     *********/
   
     int i, j, n;
-    n=20;
+    n=40;
     int arreglo[n];
     srand(time(NULL));
     for (i=0; i<n; i++){
-        arreglo[i] = aleatorio(0, 100000);
+        arreglo[i] = aleatorio(0, 10000);
     }
   
     /*********
@@ -176,8 +176,8 @@ int main (int argc, char *argv[]){
 
         nm = p+r;
         for (i=1; i<npr; i++){
-            for(j=nm; j<nm+p; j++){
-                arreglo3[j-nm] = arreglo[j];
+            for(j=0; j<p; j++){
+                arreglo3[j] = arreglo[j+nm];
             }
             merge(arreglo2, nm, arreglo3, p, arreglo4);
             nm = nm + p;
