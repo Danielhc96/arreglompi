@@ -135,8 +135,6 @@ int main (int argc, char *argv[]){
 
         SortArray(arreglo,0,nm);   /*ordena*/
 
-        int arreglo2[p]; /*arreglo aux */
-
         /*********
         *
         Recibe los arreglos desde esclavos e inserta en arreglo
@@ -150,8 +148,8 @@ int main (int argc, char *argv[]){
         }
         
         printf("\n\nArreglo ordenado");
-        for (i=0;i <10; i++){
-            printf("\nNumero %d = %d", i+1, arreglo[i]);
+        for (j=0; j<10; j++){
+            printf("\nNumero %d = %d", j+1, arreglo[j]);
         }
         
         printf("\n\n");
