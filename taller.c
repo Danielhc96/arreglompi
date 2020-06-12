@@ -175,8 +175,13 @@ int main (int argc, char *argv[]){
         for (i=1; i<npr; i++){
             for(j=nm; j<nm+p; j++){
                 printf("\nNumero %d = %d", j+1, arreglo[j]);
+                insertar(arreglo2, 10, j,arreglo[j] )
             }
             nm = nm + p;
+        }
+        printf("\n\nArreglo2 ordenado");
+        for (i=0;i <10; i++){
+            printf("\nNumero %d = %d", i+1, arreglo2[i]);
         }
   
     }
