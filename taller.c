@@ -99,6 +99,10 @@ int main (int argc, char *argv[]){
             MPI_Recv(&nm, 1, MPI_INT, source, tag1, MPI_COMM_WORLD, &status);
             MPI_Recv(&arreglo[nm], p, MPI_INT, source, tag2, MPI_COMM_WORLD, &status); 
         }
+      printf("\n\nArreglo no ordenado");  
+      for (j=0;j<10;j++){
+        printf("\nNumeroM %d = %d", j+1, arreglo[j]);
+        }
     }
   
     if (pid > 0){
