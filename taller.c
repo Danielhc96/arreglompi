@@ -213,12 +213,12 @@ int main (int argc, char *argv[]){
                 arreglo3[j-nm] = arreglo[j];
                 printf("\nNumero %d = %d", j+1, arreglo[j]);
             }
-            merge(arreglo2, nm, arreglo3, p, arreglo4);
+            merge(arreglo2, nm, arreglo3, p, arreglo2);
             nm = nm + p;
         }
         printf("\n\nArreglo ordenado");
         for (i=0;i <10; i++){
-            printf("\nNumero %d = %d", i+1, arreglo4[i]);
+            printf("\nNumero %d = %d", i+1, arreglo2[i]);
         }
         printf("\n");
     }
