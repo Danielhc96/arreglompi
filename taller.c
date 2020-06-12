@@ -170,7 +170,7 @@ int main (int argc, char *argv[]){
             printf("\nNumero %d = %d", i+1, arreglo2[i]);
         }
         printf("\n");
-        print("\nArreglo nodo");
+        printf("\nArreglo nodo");
         nm = p+r;
         for (i=1; i<npr; i++){
             for(j=nm;j<nm+p;j++){
