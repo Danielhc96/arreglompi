@@ -67,6 +67,8 @@ void merge(int a[], int m, int b[], int n, int sorted[]) {
 
 int main (int argc, char *argv[]){
   
+    clock_t tic = clock();
+  
     /*********
     *
     crear areglo y llenar con numeros aleatoreos
@@ -218,4 +220,8 @@ int main (int argc, char *argv[]){
     *********/
   
     MPI_Finalize();
+    
+    clock_t toc = clock();
+    printf("Transcurrido: %f segundos\n", (double)(toc - tic) / CLOCKS_PER_SEC);
+    return 0;
 }
