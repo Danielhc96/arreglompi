@@ -73,6 +73,8 @@ int main (int argc, char *argv[]){
     int nm, dest, source;  /*parte de maestro, destino, fuente, contador*/
     int tag1 = 2;
     int tag2 = 1;
+    int arreglo2[nm];
+    int arreglo3[p];
   
     /*********
     *
@@ -123,12 +125,18 @@ int main (int argc, char *argv[]){
             printf("\nNumero %d = %d", i+1, arreglo[i]);
         }
         printf("\n\n");
-      
-        nm = p+r;  
+        
+        nm = p+r; 
+        printf("\n\nArreglo en maestro");
+        for (i=0; i<nm; i++){
+            arreglo2[i]=arreglo[i];
+            printf("\nNumero %d = %d", i+1, arreglo2[i]);
+        } 
         printf("\n\nArreglo en nodo");
         for(i=1; i<npr; i++){
                 for (j=nm; j<nm+p; j++){
-                printf("\nNumero %d = %d", j+1, arreglo[j]);
+                arreglo3[j-nm]=arreglo[j];
+                printf("\nNumero %d = %d", j+1, arreglo3[j-nm]);
             }
             printf("\n");
             nm = nm + p;
