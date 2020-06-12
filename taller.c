@@ -73,11 +73,10 @@ int main (int argc, char *argv[]){
     *********/
   
     int i, j, n;
-    printf("Introduzca tamaño del arreglo: ");
-    scanf("%d",&n);
+    n=10;
     int arreglo[n];
     srand(time(NULL));
-    for (i=0; i<10; i++){
+    for (i=0; i<n; i++){
         arreglo[i] = aleatorio(0, 10000);
     }
   
