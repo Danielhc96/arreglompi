@@ -135,7 +135,7 @@ int main (int argc, char *argv[]){
 
         SortArray(arreglo,0,nm);   /*ordena*/
 
-        int arreglo2[10]; /*arreglo aux */
+        int arreglo2[p]; /*arreglo aux */
 
         /*********
         *
@@ -147,6 +147,15 @@ int main (int argc, char *argv[]){
             source = i;
             MPI_Recv(&nm, 1, MPI_INT, source, tag1, MPI_COMM_WORLD, &status);
             MPI_Recv(&arreglo[nm], p, MPI_INT, source, tag2, MPI_COMM_WORLD, &status);
+            
+            for(j=0; j<p; j++){
+                arreglo2[j] = arreglo[j+nm];
+            }
+            for (j=0; j<p; j++){
+                printf("\nNumero %d = %d", j+1, arreglo2[j]);
+            }
+            printf("\narreglo proceso");
+          
         }
       
          /*********
@@ -154,11 +163,11 @@ int main (int argc, char *argv[]){
         junta y muestra arreglo ordenado
          *
         *********/
-        nm = p+r;
+        /*nm = p+r;
         for (i=1; i<npr ; i++){
             merge(nm, nm+p, nm+(i+1)*p+1 , arreglo, arreglo2);
             nm = nm + p;
-        }
+        }*/
       
         printf("\n\nArreglo ordenado");
         for (i=0;i <10; i++){
