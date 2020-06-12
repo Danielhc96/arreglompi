@@ -174,7 +174,7 @@ int main (int argc, char *argv[]){
         nm = p+r;
         for (i=1; i<npr; i++){
             for(j=nm; j<nm+p; j++){
-                printf("\nNumero %d = %d", j+1, arreglo[i]);
+                printf("\nNumero %d = %d", j+1, arreglo[j]);
             }
             nm = nm + p;
         }
