@@ -165,7 +165,10 @@ int main (int argc, char *argv[]){
         for (i=0;i <10; i++){
             printf("\nNumero %d = %d", i+1, arreglo[i]);
         }
-        
+        printf("\n\nArreglo2");
+        for (i=0;i <10; i++){
+            printf("\nNumero %d = %d", i+1, arreglo2[i]);
+        }
         printf("\n\n");
   
     }
