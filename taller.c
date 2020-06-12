@@ -173,10 +173,10 @@ int main (int argc, char *argv[]){
         printf("\nArreglo nodo");
         nm = p+r;
         for (i=1; i<npr; i++){
-            for(j=nm;j<nm+p;j++){
+            for(j=nm; j<nm+p; j++){
                 printf("\nNumero %d = %d", j+1, arreglo[i]);
-                nm = nm + p;
             }
+            nm = nm + p;
         }
   
     }
