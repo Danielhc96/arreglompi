@@ -31,34 +31,6 @@ void SortArray (int array[],int first,int last){
     if (i<last) SortArray(array,i,last);
 }
 
-void merge (int i, int mid, int j, int a[], int aux[]){
-    int pointer_left = i;       // pointer_left points to the beginning of the left sub-array
-    int pointer_right = mid + 1;        // pointer_right points to the beginning of the right sub-array
-    int k;      // k is the loop counter
-
-    // we loop from i to j to fill each element of the final merged array
-    for (k = i; k <= j; k++) {
-        if (pointer_left == mid + 1) {      // left pointer has reached the limit
-            aux[k] = a[pointer_right];
-            pointer_right++;
-        } else if (pointer_right == j + 1) {        // right pointer has reached the limit
-            aux[k] = a[pointer_left];
-            pointer_left++;
-        } else if (a[pointer_left] < a[pointer_right]) {        // pointer left points to smaller element
-            aux[k] = a[pointer_left];
-            pointer_left++;
-        } else {        // pointer right points to smaller element
-            aux[k] = a[pointer_right];
-            pointer_right++;
-        }
-    }
-
-    for (k = i; k <= j; k++) {      // copy the elements from aux[] to a[]
-        a[k] = aux[k];
-    }
-
-}
-
 int main (int argc, char *argv[]){
   
     /*********
@@ -146,12 +118,10 @@ int main (int argc, char *argv[]){
             MPI_Recv(&nm, 1, MPI_INT, source, tag1, MPI_COMM_WORLD, &status);
             MPI_Recv(&arreglo[nm], p, MPI_INT, source, tag2, MPI_COMM_WORLD, &status); 
         }
-        
         printf("\n\nArreglo ordenado");
-        for (j=0; j<10; j++){
-            printf("\nNumero %d = %d", j+1, arreglo[j]);
+        for (i=0; i<10; i++){
+            printf("\nNumero %d = %d", i+1, arreglo[i]);
         }
-        
         printf("\n\n");
   
     }
