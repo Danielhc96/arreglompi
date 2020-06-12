@@ -169,10 +169,10 @@ int main (int argc, char *argv[]){
         *********/
       
         int arreglo2[p+r]; /*arreglo donde se agregaran datos ordenados*/
-        for (i=0; i<10; i++){  /*inicializa en 0*/
+        for (i=0; i<(p+r); i++){  /*inicializa en 0*/
             arreglo2[i] = 0;
         }
-        for (i=0; i<p+r; i++){  /*agrega datos ordenados de maestro*/
+        for (i=0; i<(p+r); i++){  /*agrega datos ordenados de maestro*/
             arreglo2[i] = arreglo[i];
         }
       
@@ -199,7 +199,7 @@ int main (int argc, char *argv[]){
         }
       
         printf("\n\nArreglo2");
-        for (i=0;i <10; i++){
+        for (i=0;i <(p+r); i++){
             printf("\nNumero %d = %d", i+1, arreglo2[i]);
         }
         printf("\n");
@@ -213,12 +213,12 @@ int main (int argc, char *argv[]){
                 arreglo3[j-nm] = arreglo[j];
                 printf("\nNumero %d = %d", j+1, arreglo[j]);
             }
-            merge(arreglo2, nm, arreglo3, p, arreglo2);
+            merge(arreglo2, nm, arreglo3, p, arreglo4);
             nm = nm + p;
         }
         printf("\n\nArreglo ordenado");
         for (i=0;i <10; i++){
-            printf("\nNumero %d = %d", i+1, arreglo2[i]);
+            printf("\nNumero %d = %d", i+1, arreglo4[i]);
         }
         printf("\n");
     }
