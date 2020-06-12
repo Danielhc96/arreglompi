@@ -89,7 +89,7 @@ int main (int argc, char *argv[]){
     int p = n/npr;          /*parte a repartir*/
     int r = n%npr;          /*numeros sobrantes (resto)*/
     /*int nm = p+r;           /*numeros que trabajara el maestro*/
-    int nm, dest, source, j;  /*parte de maestro, destino, fuente, contador*/
+    int nm, dest, source;  /*parte de maestro, destino, fuente, contador*/
     int tag1 = 2;
     int tag2 = 1;
     /*********
@@ -102,7 +102,6 @@ int main (int argc, char *argv[]){
     - juntar arreglos
     *
     *********/
-    int j;
     if (pid == 0){
         /*********
         *
