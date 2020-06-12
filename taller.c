@@ -73,7 +73,7 @@ int main (int argc, char *argv[]){
     *********/
   
     int i, j, n;
-    n=40;
+    n=30;
     int arreglo[n];
     srand(time(NULL));
     for (i=0; i<n; i++){
@@ -146,9 +146,7 @@ int main (int argc, char *argv[]){
         *********/
       
         int arreglo2[n]; /*arreglo donde se agregaran datos ordenados*/
-        for (i=0; i<(n); i++){  /*inicializa en 0*/
-            arreglo2[i] = 0;
-        }
+        
         for (i=0; i<(p+r); i++){  /*agrega datos ordenados de maestro*/
             arreglo2[i] = arreglo[i];
         }
@@ -167,7 +165,7 @@ int main (int argc, char *argv[]){
       
          /*********
         *
-        muestra arreglo ordenado
+        une y muestra arreglo ordenado
          *
         *********/
         
