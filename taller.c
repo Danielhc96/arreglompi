@@ -115,11 +115,11 @@ int main (int argc, char *argv[]){
         *
         *********/
       
-      nm = p+r;  
-      for(dest=1; dest<npr; dest++){
-            MPI_Send(&nm, 1, MPI_INT, dest, tag1, MPI_COMM_WORLD);
-            MPI_Send(&arreglo[nm], p, MPI_INT, dest, tag2, MPI_COMM_WORLD);
-            nm = nm + p;
+        nm = p+r;  
+        for(dest=1; dest<npr; dest++){
+              MPI_Send(&nm, 1, MPI_INT, dest, tag1, MPI_COMM_WORLD);
+              MPI_Send(&arreglo[nm], p, MPI_INT, dest, tag2, MPI_COMM_WORLD);
+              nm = nm + p;
         }
       
         /*********
@@ -158,7 +158,6 @@ int main (int argc, char *argv[]){
             for (j=nm; j< nm+p; j++){
                 insertar(arreglo2,10,nm,arreglo[j]);
             }
-
         }
       
         /*********
@@ -169,9 +168,9 @@ int main (int argc, char *argv[]){
       
         printf("\n\nArreglo ordenado");
         for (i=0;i <10; i++){
-        printf("\nNumero %d = %d", i+1, arreglo[i]);
+            printf("\nNumero %d = %d", i+1, arreglo[i]);
         }
-        printf("\n")
+        printf("\n");
     }
   
     /*********
