@@ -1,6 +1,7 @@
 #include "mpi.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 // Devuelve un número aleatorio en un rango
 int aleatorio(int minimo, int maximo) {
@@ -73,8 +74,7 @@ int main (int argc, char *argv[]){
     *********/
   
     int i, j, n;
-    printf("Introduce largo arreglo: \n");
-    scanf("%d", &n);
+    n = atoi(argv[1]);
     int arreglo[n];
     srand(time(NULL));
     for (i=0; i<n; i++){
