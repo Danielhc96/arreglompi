@@ -87,54 +87,19 @@ int main (int argc, char *argv[]){
     *********/
   
     if (pid == 0){
-        /*********
-        *
-        Envio de tareas a procesos
-        *
-        *********/
         nm = p+r;  
         for(dest=1; dest<npr; dest++){
               MPI_Send(&nm, 1, MPI_INT, dest, tag1, MPI_COMM_WORLD);
               MPI_Send(&arreglo[nm], p, MPI_INT, dest, tag2, MPI_COMM_WORLD);
               nm = nm + p;
         }
-      
-        /*********
-        *
-        Trabajo parte maestro
-        *
-        *********/
-
         SortArray(arreglo,0,nm);   /*ordena*/
-
-        /*********
-        *
-        Recibe los arreglos desde esclavos e inserta en arreglo
-        *
-        *********/
-     
         for (i=1; i<npr; i++){
             source = i;
             MPI_Recv(&nm, 1, MPI_INT, source, tag1, MPI_COMM_WORLD, &status);
             MPI_Recv(&arreglo[nm], p, MPI_INT, source, tag2, MPI_COMM_WORLD, &status); 
         }
-      
-      
-        printf("\n\nArreglo no ordenado");
-        for (i=0; i<10; i++){
-            printf("\nNumero %d = %d", i+1, arreglo[i]);
-        }
-       
     }
-  
-    /*********
-    *
-    Parte del Esclavo
-    - recibe arreglo
-    - trabaja arreglo
-    - envia 
-    *
-    *********/
   
     if (pid > 0){
         source = 0;
