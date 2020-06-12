@@ -47,10 +47,7 @@ int main (int argc, char *argv[]){
     for (i=0; i<10; i++){
         arreglo[i] = aleatorio(0, 10000);
     }
-    printf("\n\nArreglo ordenado");
-    for (i=0; i<10; i++){
-        printf("\nNumero %d = %d", i+1, arreglo[i]);
-    }
+    
   
     /*********
     *
@@ -122,6 +119,12 @@ int main (int argc, char *argv[]){
             MPI_Recv(&arreglo[nm], p, MPI_INT, source, tag2, MPI_COMM_WORLD, &status); 
         }
       
+      
+        printf("\n\nArreglo no ordenado");
+        for (i=0; i<10; i++){
+            printf("\nNumero %d = %d", i+1, arreglo[i]);
+        }
+        SortArray(arreglo,0,10);
       
         printf("\n\nArreglo ordenado");
         for (i=0; i<10; i++){
