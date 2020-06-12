@@ -178,6 +178,8 @@ int main (int argc, char *argv[]){
         for (i=1; i<npr; i++){
             for(j=nm; j<nm+p; j++){
                 printf("\nNumero %d = %d", j+1, arreglo[j]);
+                arrglo3[j-m]=0;
+                arreglo3[j-nm]=arrreglo[j];
             }
             nm = nm + p;
         }
