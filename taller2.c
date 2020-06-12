@@ -192,7 +192,8 @@ int main (int argc, char *argv[]){
         }
         printf("\n");
         clock_t toc = clock();
-        printf("Transcurrido: %f segundos\n", (double)(toc - tic) / CLOCKS_PER_SEC);
+        double elapsed = (double)(toc - tic) * 1000.0 / CLOCKS_PER_SEC;
+        printf("Tiempo transcurrido en ms: %f", elapsed);
     }
   
     /*********
