@@ -30,7 +30,39 @@ void SortArray (int array[],int first,int last){
     if (first<j) SortArray(array,first,j);
     if (i<last) SortArray(array,i,last);
 }
+void merge(int a[], int m, int b[], int n, int sorted[]) {
+  int i, j, k;
 
+  j = k = 0;
+
+  for (i = 0; i < m + n;) {
+    if (j < m && k < n) {
+      if (a[j] < b[k]) {
+        sorted[i] = a[j];
+        j++;
+      }
+      else {
+        sorted[i] = b[k];
+        k++;
+      }
+      i++;
+    }
+    else if (j == m) {
+      for (; i < m + n;) {
+        sorted[i] = b[k];
+        k++;
+        i++;
+      }
+    }
+    else {
+      for (; i < m + n;) {
+        sorted[i] = a[j];
+        j++;
+        i++;
+      }
+    }
+  }
+}
 void insertar(int listaOrdenada[],int N, int numelem,int numero){
      while(numero != 0 && numelem < N){
         int i = 0;
@@ -137,7 +169,7 @@ int main (int argc, char *argv[]){
         *********/
       
         int arreglo2[p+r]; /*arreglo donde se agregaran datos ordenados*/
-        for (i=0; i<10; i++){  /*inicializa en 0*/
+        for (i=0; i<p+r; i++){  /*inicializa en 0*/
             arreglo2[i] = 0;
         }
         for (i=0; i<p+r; i++){  /*agrega datos ordenados de maestro*/
@@ -173,6 +205,7 @@ int main (int argc, char *argv[]){
         printf("\n");
       
         int arreglo3[p];
+        int arreglo4[10];
         printf("\nArreglo nodo");
         nm = p+r;
         for (i=1; i<npr; i++){
@@ -180,13 +213,14 @@ int main (int argc, char *argv[]){
                 arreglo3[j-nm] = arreglo[j];
                 printf("\nNumero %d = %d", j+1, arreglo[j]);
             }
+            merge(arreglo2, nm, arreglo3, p, arreglo4)
             nm = nm + p;
         }
-        printf("\n\nArreglo2 ordenado");
+        printf("\n\nArreglo ordenado");
         for (i=0;i <10; i++){
-            printf("\nNumero %d = %d", i+1, arreglo2[i]);
+            printf("\nNumero %d = %d", i+1, arreglo4[i]);
         }
-  
+        printf("\n");
     }
   
     /*********
