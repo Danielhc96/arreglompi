@@ -58,29 +58,7 @@ void merge (int i, int mid, int j, int a[], int aux[]){
     }
 
 }
-void insertar(int listaOrdenada[],int N, int numelem,int numero){
-     while(numero != 0 && numelem < N){
-        int i = 0;
-        //ubica la posición para insertar el número
-        while(i<numelem && listaOrdenada[i] < numero) i++;
-        //en el caso que se inserte en la última posición: i == numelem
-        if(i==numelem) {
-           listaOrdenada[i]=numero;
-           numelem++;
-        }
-        else{
-           //tiene que desplazar a todos los elementos posteriores
-           int j = numelem;
-           numelem++;
-           //recorre la lista de forma inversa para desplazar los valores
-           while(j>i){
-             listaOrdenada[j] = listaOrdenada[j-1];
-             j--;
-           }
-           listaOrdenada[i] = numero;
-        }
-    }
-}
+
 int main (int argc, char *argv[]){
   
     /*********
@@ -175,7 +153,6 @@ int main (int argc, char *argv[]){
             source = i;
             MPI_Recv(&nm, 1, MPI_INT, source, tag1, MPI_COMM_WORLD, &status);
             MPI_Recv(&arreglo[nm], p, MPI_INT, source, tag2, MPI_COMM_WORLD, &status);
-            merge(p+r, nm+p, nm+(i+1)*p-1, arreglo, arreglo2);
         }
       
          /*********
