@@ -185,7 +185,7 @@ int main (int argc, char *argv[]){
       
         printf("\n\nArreglo ordenado");
         for (i=0;i <n; i++){
-            printf("\nNumero %d = %d", i+1, arreglo4[i]);
+            printf("%d ", arreglo4[i]);
         }
         printf("\n");
     }
