@@ -150,7 +150,11 @@ int main (int argc, char *argv[]){
         for (i=0; i<(p+r); i++){  /*agrega datos ordenados de maestro*/
             arreglo2[i] = arreglo[i];
         }
-      
+        printf("\nArreglo2\n");
+        for (j=0; j<p; j++){
+          printf("%d ", arreglo2[j]);
+        }
+        printf("\n");
         /*********
         *
         Recibe los arreglos desde esclavos e inserta en arreglo
@@ -177,14 +181,24 @@ int main (int argc, char *argv[]){
             for(j=0; j<p; j++){
                 arreglo3[j] = arreglo[j+nm];
             }
+            printf("\nArreglo3\n");
+            for (j=0; j<p; j++){
+              printf("%d ", arreglo3[j]);
+            }
+            printf("\n");
             merge(arreglo2, nm, arreglo3, p, arreglo4);
-            for(j=0; j<nm; j++){
+            for(j=0; j<nm+p; j++){
               arreglo2[j]=arreglo4[j];
             }
+            printf("\nArreglo2\n");
+            for (j=0; j<nm+p; j++){
+              printf("%d ", arreglo2[j]);
+            }
+            printf("\n");
             nm = nm + p;
         }
       
-        printf("\n\nArreglo ordenado");
+        printf("\nArreglo ordenado\n");
         for (i=0; i<n; i++){
             printf("%d ", arreglo4[i]);
         }
