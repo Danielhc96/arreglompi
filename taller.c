@@ -114,7 +114,7 @@ int main (int argc, char *argv[]){
         Envio de tareas a procesos
         *
         *********/
-      
+        
         nm = p+r;  
         for(dest=1; dest<npr; dest++){
               MPI_Send(&nm, 1, MPI_INT, dest, tag1, MPI_COMM_WORLD);
@@ -127,8 +127,8 @@ int main (int argc, char *argv[]){
         Trabajo parte maestro
         *
         *********/
-
-        SortArray(arreglo,0,nm);   /*ordena*/
+        
+        SortArray(arreglo,0,p+r);   /*ordena*/
 
         /*********
         *
